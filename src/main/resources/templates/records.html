@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/defaultLayout}">
+<head>
+    <meta charset="utf-8" />
+    <title th:text="'달리기왕 개랑맨'">달리기왕 개랑맨 - records</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" th:href="@{/assets/favicon.ico}" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+<!-- Page content-->
+<div layout:fragment="content">
+    <div class="container-fluid p-3">
+        <div style="display: flex;justify-content: center">
+        <button class="btn btn-success" style="width: 95%" onclick="location.href='layouts/defaultLayout.html'" th:onclick="|location.href='@{/records/add}'|" type="button">등록</button>
+        </div>
+        <div class="container-fluid">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>회차</th>
+                    <th>일자</th>
+                    <th>기온</th>
+                    <th>페이스</th>
+                    <th>거리</th>
+                    <th>시간</th>
+                    <th>심박수</th>
+                    <th>비고</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+                </thead>
+                <tbody th:each="record: ${records}">
+                <tr>
+                    <td th:text="${record.id}">1</td>
+                    <td th:text="${#temporals.format(record.dateTime,'yyyy-MM-dd HH:mm:ss')}">2022년 10월 20일</td>
+                    <td th:text="${record.temperature}">18.5도</td>
+                    <td th:text="|${record.paceMin}분 ${record.paceSec}초|">5분45초</td>
+                    <td th:text="|${record.distance}km|">10km</td>
+                    <td th:text="|${record.durationHour}시간 ${record.durationMin}분 ${record.durationSec}초|">1시간 55분 20초</td>
+                    <td th:text="${record.heartRate}">178</td>
+                    <td th:text="${record.comment}">기본 메시지</td>
+                    <td><button class="btn btn-dark" onclick="#!" th:onclick="|location.href='@{/records/{recordId}/edit(recordId=${record.id})}'|" type="button">수정</button></td>
+                    <td><button class="btn btn-danger" onclick="alert('삭제 기능 미구현!!');" type="button">삭제</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

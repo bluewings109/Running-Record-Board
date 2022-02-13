@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/defaultLayout}">
+<head>
+    <meta charset="utf-8" />
+    <title th:text="'달리기왕 개랑맨'">달리기왕 개랑맨 - addRecordForm</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" th:href="@{/assets/favicon.ico}" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container-fluid p-3">
+        <div class="py-5 text-center">
+            <h2>달리기 기록 등록</h2>
+        </div>
+
+        <h4 class="mb-3">달리기 기록 입력</h4>
+
+        <form action="/records" method="post">
+            <div>
+                <label for="dateTime">일시</label>
+                <input type="datetime-local" id="dateTime" name="dateTime" class="form-control" placeholder="운동시작시간을 입력하세요">
+            </div>
+            <div>
+                <label for="temperature">기온</label>
+                <input type="text" id="temperature" name="temperature" class="form-control" placeholder="기온을 입력하세요">
+            </div>
+            <div>
+                <label for="distance">거리</label>
+                <input type="text" id="distance" name="distance" class="form-control" placeholder="거리(km)를 입력하세요">
+            </div>
+            <div>
+                <label for="durationHour">시간</label>
+                <input type="text" id="durationHour" name="durationHour" class="form-control" placeholder="시간을 입력하세요">
+            </div>
+            <div>
+                <label for="durationMin">분</label>
+                <input type="text" id="durationMin" name="durationMin" class="form-control" placeholder="분을 입력하세요">
+            </div>
+            <div>
+                <label for="durationSec">초</label>
+                <input type="text" id="durationSec" name="durationSec" class="form-control" placeholder="초를 입력하세요">
+            </div>
+            <div>
+                <label for="heartRate">심박수</label>
+                <input type="text" id="heartRate" name="heartRate" class="form-control" placeholder="심박수를 입력하세요">
+            </div>
+            <div>
+                <label for="comment">비고</label>
+                <input type="text" id="comment" name="comment" class="form-control" placeholder="특이사항을 입력하세요">
+            </div>
+
+            <hr class="my-4">
+
+            <div class="row">
+                <div class="col">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">기록 등록</button>
+                </div>
+                <div class="col">
+                    <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='records.html'" th:onclick="|location.href='@{/records}'|" type="button">취소</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
