@@ -33,9 +33,9 @@
                     <th>삭제</th>
                 </tr>
                 </thead>
-                <tbody th:each="record: ${records}">
+                <tbody th:each="record,index: ${records}">
                 <tr>
-                    <td th:text="${record.id}">1</td>
+                    <td th:text="${index.count}">1</td>
                     <td th:text="${#temporals.format(record.dateTime,'yyyy-MM-dd HH:mm:ss')}">2022년 10월 20일</td>
                     <td th:text="${record.temperature}">18.5도</td>
                     <td th:text="|${record.paceMin}분 ${record.paceSec}초|">5분45초</td>
@@ -44,12 +44,16 @@
                     <td th:text="${record.heartRate}">178</td>
                     <td th:text="${record.comment}">기본 메시지</td>
                     <td><button class="btn btn-dark" onclick="#!" th:onclick="|location.href='@{/records/{recordId}/edit(recordId=${record.id})}'|" type="button">수정</button></td>
-                    <td><button class="btn btn-danger" onclick="alert('삭제 기능 미구현!!');" type="button">삭제</button></td>
+<!--                    <td><button id="deleteButton" class="btn btn-danger" onclick="onClickDeleteUsingJQuery()" th:onclick="|onClickDeleteUsingJQuery(${record.id})|" type="button">삭제</button></td>-->
+                    <td><button id="deleteButton" class="btn btn-danger" onclick="onClickDelete()" th:onclick="|onClickDelete(${record.id})|" type="button">삭제</button></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
+</div>
+<div layout:fragment="content-js">
+    <script type="text/javascript" src="../static/js/records.js" th:src="@{/js/records.js}"></script>
 </div>
 </body>
 </html>

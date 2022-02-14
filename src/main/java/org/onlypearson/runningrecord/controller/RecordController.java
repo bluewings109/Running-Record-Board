@@ -59,9 +59,11 @@ public class RecordController {
     }
 
     @DeleteMapping
+    @ResponseBody
     public String deleteRecord(@RequestParam Long recordId){
+        log.info("삭제할 id : {}",recordId);
         recordService.remove(recordId);
-        return "redirect:/records";
+        return "삭제 성공";
     }
 
     @PostConstruct
