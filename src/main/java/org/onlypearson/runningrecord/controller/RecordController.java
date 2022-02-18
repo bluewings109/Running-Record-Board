@@ -24,7 +24,7 @@ public class RecordController {
     }
 
     @GetMapping
-    public String records(Model model){
+    public String findRecords(Model model){
         model.addAttribute("records", recordService.findAllRecords());
         return "records";
     }
