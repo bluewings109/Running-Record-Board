@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
-public class Record {
+public class Record implements Comparable<Record>{
 
     private Long id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -115,5 +115,8 @@ public class Record {
         return Objects.hash(dateTime, temperature, paceMin, paceSec, distance, durationHour, durationMin, durationSec, heartRate, comment);
     }
 
-
+    @Override
+    public int compareTo(Record o) {
+        return this.dateTime.compareTo(o.dateTime);
+    }
 }

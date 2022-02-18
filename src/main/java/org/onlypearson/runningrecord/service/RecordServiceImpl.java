@@ -5,6 +5,7 @@ import org.onlypearson.runningrecord.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class RecordServiceImpl implements RecordService{
     @Override
     public List<Record> findAllRecords() {
         List<Record> recordList = recordRepository.findAll();
-        recordList.sort(Comparator.comparing(Record::getDateTime));
+        Collections.sort(recordList);
 
         return recordList;
     }
