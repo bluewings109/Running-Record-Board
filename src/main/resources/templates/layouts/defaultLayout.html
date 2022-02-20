@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      th:fragment="layout (title, content, contentJS)">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title th:text="'달리기왕 개랑맨'">달리기왕 개랑맨 - Default Layout</title>
+    <title th:replace="${title}">layout title</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="../../static/assets/favicon.ico" th:href="@{/assets/favicon.ico}" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -52,7 +52,7 @@
             </div>
         </nav>
         <!-- Page content-->
-        <div layout:fragment="content"> 이곳에 컨텐츠 내용이 들어갑니다 </div>
+        <div th:replace="${content}"> layout content </div>
     </div>
 </div>
 <!-- Bootstrap core JS-->
@@ -60,6 +60,6 @@
 <!-- Core theme JS-->
 <script src="../../static/js/scripts.js" th:src="@{/js/scripts.js}"></script>
 <!-- 각 content 별 javascript -->
-<div layout:fragment="content-js"></div>
+<div th:replace="${contentJS}">layout javascript section</div>
 </body>
 </html>

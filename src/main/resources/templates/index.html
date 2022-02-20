@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/defaultLayout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{layouts/defaultLayout :: layout(~{::title}, ~{::#content}, ~{::#contentJS})}">
 <head>
     <meta charset="utf-8" />
-    <title th:text="'달리기왕 개랑맨'">달리기왕 개랑맨 - index</title>
+    <title>달리기왕 개랑맨</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" th:href="@{/assets/favicon.ico}" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -12,11 +11,14 @@
 </head>
 <body>
 <!-- Page content-->
-<div layout:fragment="content">
+<div id="content">
     <div class="container-fluid m-lg-3">
         <h1 class="mt-4">Simple Sidebar</h1>
         <p>This is index page</p>
     </div>
 </div>
+
+<!-- Page Javascript -->
+<div id="contentJS"></div>
 </body>
 </html>
