@@ -18,40 +18,40 @@
             <h2>달리기 기록 수정</h2>
         </div>
 
-        <h4 class="mb-3">달리기 기록 입력</h4>
+        <h4 class="mb-3">달리기 기록 수정</h4>
 
-        <form action="/records" th:action="@{/records/{recordId}(recordId=${record.id})}" method="post">
+        <form action="records.html" th:object="${record}" th:action="@{/records/{recordId}(recordId=${record.id})}" method="post">
             <div>
                 <label for="dateTime">일시</label>
-                <input type="datetime-local" id="dateTime" name="dateTime" class="form-control" th:field="*{record.dateTime}" value="2022-02-13T12:23:56">
+                <input type="datetime-local" id="dateTime" class="form-control" th:field="*{dateTime}">
             </div>
             <div>
                 <label for="temperature">기온</label>
-                <input type="text" id="temperature" name="temperature" class="form-control" th:value="${record.temperature}" value="10.0">
+                <input type="text" id="temperature" class="form-control" th:field="*{temperature}">
             </div>
             <div>
                 <label for="distance">거리</label>
-                <input type="text" id="distance" name="distance" class="form-control" th:value="${record.distance}" value="10.0">
+                <input type="text" id="distance" class="form-control" th:field="*{distance}">
             </div>
             <div>
                 <label for="durationHour">시간</label>
-                <input type="text" id="durationHour" name="durationHour" class="form-control" th:value="${record.durationHour}" value="1">
+                <input type="text" id="durationHour" class="form-control" th:field="*{durationHour}">
             </div>
             <div>
                 <label for="durationMin">분</label>
-                <input type="text" id="durationMin" name="durationMin" class="form-control" th:value="${record.durationMin}" value="23">
+                <input type="text" id="durationMin" class="form-control" th:field="*{durationMin}">
             </div>
             <div>
                 <label for="durationSec">초</label>
-                <input type="text" id="durationSec" name="durationSec" class="form-control" th:value="${record.durationSec}" value="45">
+                <input type="text" id="durationSec" class="form-control" th:field="*{durationSec}">
             </div>
             <div>
                 <label for="heartRate">심박수</label>
-                <input type="text" id="heartRate" name="heartRate" class="form-control" th:value="${record.heartRate}" value="170">
+                <input type="text" id="heartRate" class="form-control" th:field="*{heartRate}">
             </div>
             <div>
                 <label for="comment">비고</label>
-                <input type="text" id="comment" name="comment" class="form-control" th:value="${record.comment}" value="비고란입니다">
+                <input type="text" id="comment" class="form-control" th:field="*{comment}">
             </div>
 
             <hr class="my-4">
