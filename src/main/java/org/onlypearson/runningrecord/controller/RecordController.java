@@ -4,11 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.onlypearson.runningrecord.domain.Record;
 import org.onlypearson.runningrecord.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -24,15 +27,16 @@ public class RecordController {
     }
 
     @GetMapping
-    public String findRecords(Model model){
+    public String findRecords(Model model, HttpServletRequest request){
+        log.trace("REQUEST : {} from {}",request.getRequestURL(), request.getRemoteAddr());
         model.addAttribute("records", recordService.findAllRecords());
         return "records";
     }
 
     @PostMapping
-    public String addRecord(@ModelAttribute Record record){
-        log.info("record={}",record);
-
+    public String addRecord(@ModelAttribute Record record, HttpServletRequest request){
+        log.trace("REQUEST : {} from {}",request.getRequestURL(), request.getRemoteAddr());
+        log.info("Submit new record : {}",record);
         recordService.submit(record);
         return "redirect:/records";
     }
@@ -43,7 +47,9 @@ public class RecordController {
     }
 
     @GetMapping("/{recordId}/edit")
-    public String editRecordForm(@PathVariable Long recordId, Model model){
+    public String editRecordForm(@PathVariable Long recordId, Model model, HttpServletRequest request){
+        log.trace("REQUEST : {} from {}",request.getRequestURL(), request.getRemoteAddr());
+
         Record findRecord = recordService.findRecord(recordId);
         model.addAttribute("record", findRecord);
 
@@ -52,7 +58,9 @@ public class RecordController {
     }
 
     @PostMapping("/{recordId}")
-    public String editRecord(@PathVariable Long recordId, @ModelAttribute Record record){
+    public String editRecord(@PathVariable Long recordId, @ModelAttribute Record record, HttpServletRequest request){
+        log.trace("REQUEST : {} from {}",request.getRequestURL(), request.getRemoteAddr());
+        log.info("Edit Record : ID={}, editRecord={}", recordId, record);
         recordService.edit(recordId, record);
 
         return "redirect:/records";
@@ -60,8 +68,10 @@ public class RecordController {
 
     @DeleteMapping
     @ResponseBody
-    public String deleteRecord(@RequestParam Long recordId){
-        log.info("삭제할 id : {}",recordId);
+    public String deleteRecord(@RequestParam Long recordId, HttpServletRequest request){
+        log.trace("REQUEST : {} from {}",request.getRequestURL(), request.getRemoteAddr());
+        log.info("Delete Record. ID : {}", recordId);
+
         recordService.remove(recordId);
         return "삭제 성공";
     }
