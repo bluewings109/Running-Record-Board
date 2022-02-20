@@ -36,7 +36,7 @@
                 <tbody th:each="record,index: ${records}">
                 <tr>
                     <td th:text="${index.count}">1</td>
-                    <td th:text="${#temporals.format(record.dateTime,'yyyy-MM-dd HH:mm:ss')}">2022년 10월 20일</td>
+                    <td th:text="${#temporals.format(record.dateTime,'yyyy-MM-dd HH:mm')}">2022년 10월 20일</td>
                     <td th:text="${record.temperature}">18.5도</td>
                     <td th:text="|${record.paceMin}분 ${record.paceSec}초|">5분45초</td>
                     <td th:text="|${record.distance}km|">10km</td>
