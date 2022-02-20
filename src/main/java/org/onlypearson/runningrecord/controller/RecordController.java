@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.onlypearson.runningrecord.domain.Record;
 import org.onlypearson.runningrecord.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 @Slf4j
 @Controller
@@ -78,9 +81,9 @@ public class RecordController {
 
     @PostConstruct
     void init(){
-        Record record1 = new Record(LocalDateTime.now(),9.0,10.0,1,3,0,170,"testComment");
-        Record record2 = new Record(LocalDateTime.now(), 0.0, 10.0, 1, 0, 0, 180, "testComment");
-
+        LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+        Record record1 = new Record(now,9.0,10.0,1,3,0,170,"testComment");
+        Record record2 = new Record(now, 0.0, 10.0, 1, 0, 0, 180, "testComment");
         recordService.submit(record1);
         recordService.submit(record2);
     }
