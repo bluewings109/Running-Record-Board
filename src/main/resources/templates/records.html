@@ -22,15 +22,15 @@
                 <thead>
                 <tr>
                     <th>회차</th>
-                    <th>일자</th>
-                    <th>기온</th>
-                    <th>페이스</th>
-                    <th>거리</th>
-                    <th>시간</th>
-                    <th>심박수</th>
-                    <th>비고</th>
-                    <th>수정</th>
-                    <th>삭제</th>
+                    <th th:text="#{record.dateTime}">일시</th>
+                    <th th:text="#{record.temperature}">기온</th>
+                    <th th:text="#{record.pace}">페이스</th>
+                    <th th:text="#{record.distance}">거리</th>
+                    <th th:text="#{record.duration}">운동 시간</th>
+                    <th th:text="#{record.heartRate}">심박수</th>
+                    <th th:text="#{record.comment}">비고</th>
+                    <th th:text="#{button.update}">수정</th>
+                    <th th:text="#{button.delete}">삭제</th>
                 </tr>
                 </thead>
                 <tbody th:each="record,index: ${records}">
@@ -43,9 +43,9 @@
                     <td th:text="|${record.durationHour}시간 ${record.durationMin}분 ${record.durationSec}초|">1시간 55분 20초</td>
                     <td th:text="${record.heartRate}">178</td>
                     <td th:text="${record.comment}">기본 메시지</td>
-                    <td><button class="btn btn-dark" onclick="#!" th:onclick="|location.href='@{/records/{recordId}/edit(recordId=${record.id})}'|" type="button">수정</button></td>
+                    <td><button class="btn btn-dark" onclick="#!" th:onclick="|location.href='@{/records/{recordId}/edit(recordId=${record.id})}'|" type="button" th:text="#{button.update}">수정</button></td>
 <!--                    <td><button id="deleteButton" class="btn btn-danger" onclick="onClickDeleteUsingJQuery()" th:onclick="|onClickDeleteUsingJQuery(${record.id})|" type="button">삭제</button></td>-->
-                    <td><button id="deleteButton" class="btn btn-danger" onclick="onClickDelete()" th:onclick="|onClickDelete(${record.id})|" type="button">삭제</button></td>
+                    <td><button id="deleteButton" class="btn btn-danger" onclick="onClickDelete()" th:onclick="|onClickDelete(${record.id})|" type="button" th:text="#{button.delete}">삭제</button></td>
                 </tr>
                 </tbody>
             </table>
