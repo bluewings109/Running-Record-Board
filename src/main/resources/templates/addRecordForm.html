@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{layouts/defaultLayout :: layout (~{::title}, ~{::#content}, ~{::#contentJS})}">
+      th:replace="~{layouts/defaultLayout :: layout (~{::title}, ~{::#content}, ~{}, ~{::#contentInternalCSS})}">
 <head>
     <meta charset="utf-8" />
     <title>달리기왕 개랑맨 - addRecordForm</title>
@@ -9,6 +9,12 @@
     <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" th:href="@{/assets/favicon.ico}" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+    <style id="contentInternalCSS">
+        .field-error {
+            color: #dc3545;
+            border-color: #dc3545;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,38 +26,51 @@
 
         <h4 class="mb-3">달리기 기록 입력</h4>
 
-        <form action="/records" method="post">
+        <form action="/records/add" th:action method="post" th:object="${record}">
+            <div th:if="${#fields.hasGlobalErrors()}">
+                <p class="field-error" th:each="error: ${#fields.globalErrors()}" th:text="${error}">
+                    글로벌 오류
+                </p>
+            </div>
             <div>
                 <label for="dateTime" th:text="#{record.dateTime}">일시</label>
-                <input type="datetime-local" id="dateTime" name="dateTime" class="form-control" placeholder="운동시작시간을 입력하세요">
+                <input type="datetime-local" id="dateTime" th:field="*{dateTime}" class="form-control" th:errorclass="field-error">
+                <div th:class="field-error" th:errors="*{dateTime}">일시 에러</div>
             </div>
             <div>
                 <label for="temperature" th:text="#{record.temperature}">기온</label>
-                <input type="text" id="temperature" name="temperature" class="form-control" placeholder="기온을 입력하세요">
+                <input type="text" id="temperature" th:field="*{temperature}" class="form-control" th:errorclass="field-error">
+                <div th:class="field-error" th:errors="*{temperature}">기온 에러</div>
             </div>
             <div>
                 <label for="distance" th:text="#{record.distance}">거리</label>
-                <input type="text" id="distance" name="distance" class="form-control" placeholder="거리(km)를 입력하세요">
+                <input type="text" id="distance" th:field="*{distance}" class="form-control" th:errorclass="field-error">
+                <div th:class="field-error" th:errors="*{dateTime}">일시 에러</div>
             </div>
             <div>
                 <label for="durationHour" th:text="#{record.durationHour}">시간</label>
-                <input type="text" id="durationHour" name="durationHour" class="form-control" placeholder="시간을 입력하세요">
+                <input type="text" id="durationHour" th:field="*{durationHour}" class="form-control" th:errorclass="field-error">
+                <div th:class="field-error" th:errors="*{durationHour}">시간 에러</div>
             </div>
             <div>
                 <label for="durationMin" th:text="#{record.durationMin}">분</label>
-                <input type="text" id="durationMin" name="durationMin" class="form-control" placeholder="분을 입력하세요">
+                <input type="text" id="durationMin" th:field="*{durationMin}" class="form-control" th:errorclass="field-error">
+                <div th:class="field-error" th:errors="*{durationMin}">분 에러</div>
             </div>
             <div>
                 <label for="durationSec" th:text="#{record.durationSec}">초</label>
-                <input type="text" id="durationSec" name="durationSec" class="form-control" placeholder="초를 입력하세요">
+                <input type="text" id="durationSec" th:field="*{durationSec}" class="form-control" th:errorclass="field-error">
+                <div th:class="field-error" th:errors="*{durationSec}">초 에러</div>
             </div>
             <div>
                 <label for="heartRate" th:text="#{record.heartRate}">심박수</label>
-                <input type="text" id="heartRate" name="heartRate" class="form-control" placeholder="심박수를 입력하세요">
+                <input type="text" id="heartRate" th:field="*{heartRate}" class="form-control" th:errorclass="field-error">
+                <div th:class="field-error" th:errors="*{heartRate}">심박수 에러</div>
             </div>
             <div>
                 <label for="comment" th:text="#{record.comment}">비고</label>
-                <input type="text" id="comment" name="comment" class="form-control" placeholder="특이사항을 입력하세요">
+                <input type="text" id="comment" th:field="*{comment}" class="form-control" th:errorclass="field-error">
+                <div th:class="field-error" th:errors="*{comment}">비고 에러</div>
             </div>
 
             <hr class="my-4">
@@ -68,7 +87,5 @@
     </div>
 </div> <!-- /container -->
 
-<!-- page JS -->
-<div id="contentJS"></div>
 </body>
 </html>

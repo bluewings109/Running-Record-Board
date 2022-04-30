@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{layouts/defaultLayout :: layout(~{::title}, ~{::#content}, ~{::#contentJS})}">
+th:replace="~{layouts/defaultLayout :: layout(~{::title}, ~{::#content}, ~{}, ~{})}">
 <head>
     <meta charset="utf-8" />
     <title>달리기왕 개랑맨</title>
@@ -17,8 +17,5 @@ th:replace="~{layouts/defaultLayout :: layout(~{::title}, ~{::#content}, ~{::#co
         <p>This is index page</p>
     </div>
 </div>
-
-<!-- Page Javascript -->
-<div id="contentJS"></div>
 </body>
 </html>

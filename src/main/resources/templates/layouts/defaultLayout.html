@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      th:fragment="layout (title, content, contentJS)">
+      th:fragment="layout (title, content, contentJS, contentInternalCSS)">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -12,6 +12,7 @@
     <link rel="icon" type="image/x-icon" href="../../static/assets/favicon.ico" th:href="@{/assets/favicon.ico}" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+    <style th:replace="${contentInternalCSS}"></style>
 </head>
 <body>
 <div class="d-flex" id="wrapper">

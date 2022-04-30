@@ -4,18 +4,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.onlypearson.runningrecord.domain.Record;
 import org.onlypearson.runningrecord.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 
 @Slf4j
 @Controller
@@ -23,29 +22,43 @@ import java.time.temporal.TemporalUnit;
 public class RecordController {
 
     private final RecordService recordService;
+    private final RecordValidator recordValidator;
 
     @Autowired
-    public RecordController(RecordService recordService) {
+    public RecordController(RecordService recordService, RecordValidator recordValidator) {
         this.recordService = recordService;
+        this.recordValidator = recordValidator;
+    }
+
+    @InitBinder
+    public void init(WebDataBinder dataBinder){
+        dataBinder.addValidators(recordValidator);
     }
 
     @GetMapping
-    public String findRecords(Model model, HttpServletRequest request){
-        log.trace("REQUEST : {} from {}",request.getRequestURL(), request.getRemoteAddr());
+    public String findRecords(Model model){
         model.addAttribute("records", recordService.findAllRecords());
         return "records";
     }
 
-    @PostMapping
-    public String addRecord(@ModelAttribute Record record, HttpServletRequest request){
-        log.trace("REQUEST : {} from {}",request.getRequestURL(), request.getRemoteAddr());
-        log.info("Submit new record : {}",record);
+    @PostMapping("/add")
+    public String addRecord(@Validated @ModelAttribute Record record, BindingResult bindingResult){
+        log.info("record={}",record);
+        // validation
+        if(bindingResult.hasErrors()){
+            log.info("bindingResult={}",bindingResult);
+            return "addRecordForm";
+        }
+
+
+        // 성공로직
         recordService.submit(record);
         return "redirect:/records";
     }
 
     @GetMapping("/add")
-    public String addRecordForm(){
+    public String addRecordForm(Model model){
+        model.addAttribute(new Record());
         return "addRecordForm";
     }
 

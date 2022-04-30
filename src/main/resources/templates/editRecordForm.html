@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{layouts/defaultLayout :: layout (~{::title}, ~{::#content}, ~{::#contentJS})}">
+      th:replace="~{layouts/defaultLayout :: layout (~{::title}, ~{::#content}, ~{}, ~{})}">
 <head>
     <meta charset="utf-8" />
     <title>달리기왕 개랑맨 - editRecordForm</title>
@@ -67,8 +67,5 @@
         </form>
     </div>
 </div> <!-- /container -->
-
-<!-- Page JS -->
-<div id="contentJS"></div>
 </body>
 </html>

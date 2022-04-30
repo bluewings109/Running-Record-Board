@@ -15,12 +15,10 @@ class RecordTest {
         Record record = new Record(LocalDateTime.now(), 0.0,10.0, 1,0,0,100,"테스트코멘트");
 
         //when
-        record.setDistance(5);
+        record.setDistance(5.0);
 
         //then
         assertThat(record.getDistance()).isEqualTo(5);
-        assertThat(record.getPaceMin()).isEqualTo(12);
-        assertThat(record.getPaceSec()).isEqualTo(0);
     }
 
     @Test
@@ -33,8 +31,6 @@ class RecordTest {
 
         //then
         assertThat(record.getDurationHour()).isEqualTo(2);
-        assertThat(record.getPaceMin()).isEqualTo(12);
-        assertThat(record.getPaceSec()).isEqualTo(0);
     }
 
     @Test
@@ -48,8 +44,6 @@ class RecordTest {
 
         //then
         assertThat(record.getDurationMin()).isEqualTo(30);
-        assertThat(record.getPaceMin()).isEqualTo(3);
-        assertThat(record.getPaceSec()).isEqualTo(0);
     }
 
     @Test
@@ -63,7 +57,17 @@ class RecordTest {
 
         //then
         assertThat(record.getDurationSec()).isEqualTo(30);
-        assertThat(record.getPaceMin()).isEqualTo(0);
-        assertThat(record.getPaceSec()).isEqualTo(30);
+    }
+
+    @Test
+    void getPace(){
+        //given
+        Record record = new Record(LocalDateTime.now(), 0.0, 10.0, 1,0,0,100, "");
+
+        //when
+        String pace = record.getPace();
+
+        //then
+        assertThat(pace).isEqualTo("6'00\"/km");
     }
 }
