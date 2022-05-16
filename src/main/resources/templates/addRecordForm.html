@@ -19,14 +19,14 @@
 <body>
 
 <div id="content">
-    <div class="container-fluid p-3">
+    <div class="container p-3">
         <div class="py-5 text-center">
             <h2>달리기 기록 등록</h2>
         </div>
 
         <h4 class="mb-3">달리기 기록 입력</h4>
 
-        <form action="/records/add" th:action method="post" th:object="${record}">
+        <form action="/records/add" th:action method="post" th:object="${recordSaveForm}">
             <div th:if="${#fields.hasGlobalErrors()}">
                 <p class="field-error" th:each="error: ${#fields.globalErrors()}" th:text="${error}">
                     글로벌 오류

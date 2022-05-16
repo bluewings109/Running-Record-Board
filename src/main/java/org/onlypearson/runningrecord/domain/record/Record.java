@@ -1,15 +1,19 @@
 package org.onlypearson.runningrecord.domain.record;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
+@Setter
 public class Record implements Comparable<Record>{
 
     private Long id;
+    @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dateTime; // 날짜. 회차의 경우 날짜로 정렬시켜서 list 리턴
     private Double temperature; // 기온
@@ -32,34 +36,6 @@ public class Record implements Comparable<Record>{
         this.durationSec = durationSec;
         this.heartRate = heartRate;
         this.comment = comment;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public void setTemperature(Double temperature) {
-        this.temperature = temperature;
-    }
-
-    public void setDistance(Double distance) {
-        this.distance = distance;
-    }
-
-    public void setDurationHour(Integer durationHour) {
-        this.durationHour = durationHour;
-    }
-
-    public void setDurationMin(Integer durationMin) {
-        this.durationMin = durationMin;
-    }
-
-    public void setDurationSec(Integer durationSec) {
-        this.durationSec = durationSec;
     }
 
     public String getPace(){
@@ -85,14 +61,6 @@ public class Record implements Comparable<Record>{
 
         return sb.toString();
 
-    }
-
-    public void setHeartRate(Integer heartRate) {
-        this.heartRate = heartRate;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
 

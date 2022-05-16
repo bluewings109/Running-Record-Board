@@ -3,12 +3,13 @@ package org.onlypearson.runningrecord.web.record.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.onlypearson.runningrecord.domain.record.Record;
 import org.onlypearson.runningrecord.domain.record.service.RecordService;
+import org.onlypearson.runningrecord.web.validation.form.RecordEditForm;
+import org.onlypearson.runningrecord.web.validation.form.RecordSaveForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -22,18 +23,12 @@ import java.time.temporal.ChronoUnit;
 public class RecordController {
 
     private final RecordService recordService;
-    private final RecordValidator recordValidator;
 
     @Autowired
-    public RecordController(RecordService recordService, RecordValidator recordValidator) {
+    public RecordController(RecordService recordService) {
         this.recordService = recordService;
-        this.recordValidator = recordValidator;
     }
 
-    @InitBinder
-    public void init(WebDataBinder dataBinder){
-        dataBinder.addValidators(recordValidator);
-    }
 
     @GetMapping
     public String findRecords(Model model){
@@ -42,14 +37,32 @@ public class RecordController {
     }
 
     @PostMapping("/add")
-    public String addRecord(@Validated @ModelAttribute Record record, BindingResult bindingResult){
-        log.info("record={}",record);
+    public String addRecord(@Validated @ModelAttribute RecordSaveForm form, BindingResult bindingResult){
+
+        // 특정 필드 validation 이 아닌 전체 로직 validation
+        if(form.getDurationHour() != null && form.getDurationMin() != null && form.getDurationSec() != null){
+            int totalDuration = form.getDurationHour() + form.getDurationMin() + form.getDurationSec();
+            if(totalDuration <= 0){
+                bindingResult.reject("zeroDuration");
+            }
+        }
+
+
         // validation
         if(bindingResult.hasErrors()){
             log.info("bindingResult={}",bindingResult);
             return "addRecordForm";
         }
 
+        Record record = new Record();
+        record.setId(form.getId());
+        record.setDateTime(form.getDateTime());
+        record.setDistance(form.getDistance());
+        record.setDurationHour(form.getDurationHour());
+        record.setDurationMin(form.getDurationMin());
+        record.setDurationSec(form.getDurationSec());
+        record.setTemperature(form.getTemperature());
+        record.setComment(form.getComment());
 
         // 성공로직
         recordService.submit(record);
@@ -58,7 +71,7 @@ public class RecordController {
 
     @GetMapping("/add")
     public String addRecordForm(Model model){
-        model.addAttribute(new Record());
+        model.addAttribute(new RecordSaveForm());
         return "addRecordForm";
     }
 
@@ -67,18 +80,52 @@ public class RecordController {
         log.trace("REQUEST : {} from {}",request.getRequestURL(), request.getRemoteAddr());
 
         Record findRecord = recordService.findRecord(recordId);
-        model.addAttribute("record", findRecord);
+
+        RecordEditForm form = new RecordEditForm();
+        form.setId(findRecord.getId());
+        form.setDateTime(findRecord.getDateTime());
+        form.setDurationHour(findRecord.getDurationHour());
+        form.setDurationMin(findRecord.getDurationMin());
+        form.setDurationSec(findRecord.getDurationSec());
+        form.setTemperature(findRecord.getTemperature());
+        form.setComment(findRecord.getComment());
+        form.setDistance(findRecord.getDistance());
+        form.setHeartRate(findRecord.getHeartRate());
+
+        model.addAttribute(form);
 
         return "editRecordForm";
 
     }
 
     @PostMapping("/{recordId}")
-    public String editRecord(@PathVariable Long recordId, @ModelAttribute Record record, HttpServletRequest request){
-        log.trace("REQUEST : {} from {}",request.getRequestURL(), request.getRemoteAddr());
-        log.info("Edit Record : ID={}, editRecord={}", recordId, record);
-        recordService.edit(recordId, record);
+    public String editRecord(@PathVariable Long recordId, @Validated @ModelAttribute RecordEditForm form, BindingResult bindingResult){
+        // 특정 필드 validation 이 아닌 전체 로직 validation
+        if(form.getDurationHour() != null && form.getDurationMin() != null && form.getDurationSec() != null){
+            int totalDuration = form.getDurationHour() + form.getDurationMin() + form.getDurationSec();
+            if(totalDuration <= 0){
+                bindingResult.reject("zeroDuration");
+            }
+        }
 
+        // validation
+        if(bindingResult.hasErrors()){
+            log.info("bindingResult={}",bindingResult);
+            return "editRecordForm";
+        }
+
+        Record record = new Record();
+        record.setId(form.getId());
+        record.setDateTime(form.getDateTime());
+        record.setDistance(form.getDistance());
+        record.setDurationHour(form.getDurationHour());
+        record.setDurationMin(form.getDurationMin());
+        record.setDurationSec(form.getDurationSec());
+        record.setTemperature(form.getTemperature());
+        record.setComment(form.getComment());
+
+        // 성공로직
+        recordService.edit(recordId, record);
         return "redirect:/records";
     }
 
