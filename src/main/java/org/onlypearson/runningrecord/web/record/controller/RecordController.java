@@ -63,6 +63,7 @@ public class RecordController {
         record.setDurationSec(form.getDurationSec());
         record.setTemperature(form.getTemperature());
         record.setComment(form.getComment());
+        record.setHeartRate(form.getHeartRate());
 
         // 성공로직
         recordService.submit(record);
@@ -123,6 +124,7 @@ public class RecordController {
         record.setDurationSec(form.getDurationSec());
         record.setTemperature(form.getTemperature());
         record.setComment(form.getComment());
+        record.setHeartRate(form.getHeartRate());
 
         // 성공로직
         recordService.edit(recordId, record);
