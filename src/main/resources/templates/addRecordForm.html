@@ -45,7 +45,7 @@
             <div>
                 <label for="distance" th:text="#{record.distance}">거리</label>
                 <input type="text" id="distance" th:field="*{distance}" class="form-control" th:errorclass="field-error">
-                <div th:class="field-error" th:errors="*{dateTime}">일시 에러</div>
+                <div th:class="field-error" th:errors="*{distance}">거리 에러</div>
             </div>
             <div>
                 <label for="durationHour" th:text="#{record.durationHour}">시간</label>
