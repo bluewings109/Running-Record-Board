@@ -7,7 +7,7 @@ import java.util.List;
 public interface RecordService {
 
     //create
-    Record submit(Record record);
+    void submit(Record record);
 
     //read
     Record findRecord(Long recordId);

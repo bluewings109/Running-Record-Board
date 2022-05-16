@@ -19,8 +19,8 @@ public class RecordServiceImpl implements RecordService{
     }
 
     @Override
-    public Record submit(Record record) {
-        return recordRepository.save(record);
+    public void submit(Record record) {
+        recordRepository.save(record);
     }
 
 
