@@ -1,12 +1,11 @@
-package org.onlypearson.runningrecord.service;
+package org.onlypearson.runningrecord.domain.record.service;
 
-import org.onlypearson.runningrecord.domain.Record;
-import org.onlypearson.runningrecord.repository.RecordRepository;
+import org.onlypearson.runningrecord.domain.record.Record;
+import org.onlypearson.runningrecord.domain.record.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Service

@@ -1,6 +1,6 @@
-package org.onlypearson.runningrecord.controller;
+package org.onlypearson.runningrecord.web.record.controller;
 
-import org.onlypearson.runningrecord.domain.Record;
+import org.onlypearson.runningrecord.domain.record.Record;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

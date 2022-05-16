@@ -1,8 +1,8 @@
-package org.onlypearson.runningrecord.controller;
+package org.onlypearson.runningrecord.web.record.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.onlypearson.runningrecord.domain.Record;
-import org.onlypearson.runningrecord.service.RecordService;
+import org.onlypearson.runningrecord.domain.record.Record;
+import org.onlypearson.runningrecord.domain.record.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

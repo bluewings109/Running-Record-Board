@@ -1,4 +1,4 @@
-package org.onlypearson.runningrecord.domain;
+package org.onlypearson.runningrecord.domain.record;
 
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;

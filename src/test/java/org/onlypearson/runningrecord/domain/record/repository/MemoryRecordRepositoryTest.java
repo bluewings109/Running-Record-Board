@@ -1,9 +1,10 @@
-package org.onlypearson.runningrecord.repository;
+package org.onlypearson.runningrecord.domain.record.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.onlypearson.runningrecord.domain.Record;
+import org.onlypearson.runningrecord.domain.record.Record;
+import org.onlypearson.runningrecord.domain.record.repository.MemoryRecordRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MemoryRecordRepositoryTest {
 
-    private MemoryRecordRepository memoryRecordRepository = new MemoryRecordRepository();
+    private final MemoryRecordRepository memoryRecordRepository = new MemoryRecordRepository();
 
     @BeforeEach
     void init(){

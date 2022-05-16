@@ -1,6 +1,7 @@
-package org.onlypearson.runningrecord.domain;
+package org.onlypearson.runningrecord.domain.record;
 
 import org.junit.jupiter.api.Test;
+import org.onlypearson.runningrecord.domain.record.Record;
 
 import java.time.LocalDateTime;
 

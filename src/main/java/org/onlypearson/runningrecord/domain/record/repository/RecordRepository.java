@@ -1,6 +1,6 @@
-package org.onlypearson.runningrecord.repository;
+package org.onlypearson.runningrecord.domain.record.repository;
 
-import org.onlypearson.runningrecord.domain.Record;
+import org.onlypearson.runningrecord.domain.record.Record;
 
 import java.util.List;
 

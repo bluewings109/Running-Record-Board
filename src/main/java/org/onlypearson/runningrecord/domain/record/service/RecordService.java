@@ -1,6 +1,6 @@
-package org.onlypearson.runningrecord.service;
+package org.onlypearson.runningrecord.domain.record.service;
 
-import org.onlypearson.runningrecord.domain.Record;
+import org.onlypearson.runningrecord.domain.record.Record;
 
 import java.util.List;
 
