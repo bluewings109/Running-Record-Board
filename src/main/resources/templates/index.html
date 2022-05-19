@@ -15,6 +15,9 @@ th:replace="~{layouts/defaultLayout :: layout(~{::title}, ~{::#content}, ~{}, ~{
     <div class="container-fluid m-lg-3">
         <h1 class="mt-4">Simple Sidebar</h1>
         <p>This is index page</p>
+        <div th:if="${param.joinMemberStatus}" class="alert alert-success" role="alert">
+            회원가입 성공!
+        </div>
     </div>
 </div>
 </body>

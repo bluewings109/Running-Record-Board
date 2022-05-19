@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Controller
@@ -32,7 +33,7 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String joinMember(@Validated @ModelAttribute MemberJoinForm form, BindingResult bindingResult) {
+    public String joinMember(@Validated @ModelAttribute MemberJoinForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         //Bean Validation
         if(bindingResult.hasErrors()){
@@ -44,6 +45,8 @@ public class MemberController {
         member.setPassword(form.getPassword());
 
         memberService.join(member);
+
+        redirectAttributes.addAttribute("joinMemberStatus",true);
 
         return "redirect:/";
     }
