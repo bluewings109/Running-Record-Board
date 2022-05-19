@@ -1,8 +1,7 @@
 package org.onlypearson.runningrecord.web.beanvalidator;
 
 import org.junit.jupiter.api.Test;
-import org.onlypearson.runningrecord.domain.record.Record;
-import org.onlypearson.runningrecord.web.validation.form.RecordSaveForm;
+import org.onlypearson.runningrecord.web.record.form.RecordSaveForm;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

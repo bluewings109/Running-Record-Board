@@ -1,4 +1,4 @@
-package org.onlypearson.runningrecord.web.validation.form;
+package org.onlypearson.runningrecord.web.record.form;
 
 import lombok.Getter;
 import lombok.Setter;
