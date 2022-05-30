@@ -4,7 +4,7 @@
       th:replace="~{layouts/defaultLayout :: layout (~{::title}, ~{::#content}, ~{}, ~{::#contentInternalCSS},false)}">
 <head>
     <meta charset="utf-8" />
-    <title>달리기왕 개랑맨 - joinMemberForm</title>
+    <title>달리기왕 개랑맨 - loginForm</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" th:href="@{/assets/favicon.ico}" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -21,12 +21,12 @@
 <div id="content">
     <div class="container p-3">
         <div class="py-5 text-center">
-            <h2>회원 가입</h2>
+            <h2>로그인</h2>
         </div>
 
-        <h4 class="mb-3">회원 가입 폼</h4>
+        <h4 class="mb-3">로그인 폼</h4>
 
-        <form action="records.html" th:object="${memberJoinForm}" th:action method="post">
+        <form action="records.html" th:object="${loginForm}" th:action method="post">
             <div th:if="${#fields.hasGlobalErrors()}">
                 <p class="field-error" th:each="error: ${#fields.globalErrors()}" th:text="${error}">
                     글로벌 오류
@@ -46,11 +46,11 @@
             <hr class="my-4">
 
             <div class="row">
-                <div class="col">
-                    <button class="w-100 btn btn-primary btn-lg" type="submit" th:text="#{button.save}">회원 가입</button>
+                <div class="col-6">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit" th:text="#{button.login}">로그인</button>
                 </div>
-                <div class="col">
-                    <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='records.html'" th:onclick="|location.href='@{/}'|" type="button" th:text="#{button.cancel}">취소</button>
+                <div class="col-6">
+                    <button class="w-100 btn btn-primary btn-lg" type="button" onclick="location.href='layouts/defaultLayout.html'" th:onclick="|location.href='@{/members/join}'|" th:text="#{button.signup}">회원가입</button>
                 </div>
             </div>
         </form>
