@@ -12,10 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @Controller
@@ -141,12 +138,4 @@ public class RecordController {
         return "삭제 성공";
     }
 
-    @PostConstruct
-    void init(){
-        LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
-        Record record1 = new Record(now,9.0,10.0,1,3,0,170,"testComment");
-        Record record2 = new Record(now, 0.0, 10.0, 1, 0, 0, 180, "testComment");
-        recordService.submit(record1);
-        recordService.submit(record2);
-    }
 }
