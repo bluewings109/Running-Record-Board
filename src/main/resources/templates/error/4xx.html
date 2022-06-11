@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/defaultLayout :: layout(~{::title}, ~{::#content}, ~{}, ~{}, false)}">
+<head>
+    <meta charset="utf-8" />
+    <title>달리기왕 개랑맨</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" th:href="@{/assets/favicon.ico}" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+<!-- Page content-->
+<div id="content">
+    <div class="container">
+        <h1 class="mt-4">4xx에러페이지</h1>
+        <p>4xx에러페이지 입니다</p>
+    </div>
+</div>
+</body>
+</html>
