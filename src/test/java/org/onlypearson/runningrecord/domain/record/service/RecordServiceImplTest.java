@@ -3,9 +3,7 @@ package org.onlypearson.runningrecord.domain.record.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.onlypearson.runningrecord.domain.record.Record;
-import org.onlypearson.runningrecord.domain.record.repository.MemoryRecordRepository;
-import org.onlypearson.runningrecord.domain.record.service.RecordService;
-import org.onlypearson.runningrecord.domain.record.service.RecordServiceImpl;
+import org.onlypearson.runningrecord.domain.record.repository.memory.MemoryRecordRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

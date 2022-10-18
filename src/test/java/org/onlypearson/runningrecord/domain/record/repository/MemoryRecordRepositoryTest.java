@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.onlypearson.runningrecord.domain.record.Record;
-import org.onlypearson.runningrecord.domain.record.repository.MemoryRecordRepository;
+import org.onlypearson.runningrecord.domain.record.repository.memory.MemoryRecordRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

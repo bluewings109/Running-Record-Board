@@ -1,7 +1,8 @@
-package org.onlypearson.runningrecord.domain.member.repository;
+package org.onlypearson.runningrecord.domain.member.repository.memory;
 
 import org.onlypearson.runningrecord.domain.member.Member;
 import org.onlypearson.runningrecord.domain.member.MemberDto;
+import org.onlypearson.runningrecord.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

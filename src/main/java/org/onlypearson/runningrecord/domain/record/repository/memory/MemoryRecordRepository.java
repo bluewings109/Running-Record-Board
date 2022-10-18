@@ -1,6 +1,7 @@
-package org.onlypearson.runningrecord.domain.record.repository;
+package org.onlypearson.runningrecord.domain.record.repository.memory;
 
 import org.onlypearson.runningrecord.domain.record.Record;
+import org.onlypearson.runningrecord.domain.record.repository.RecordRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-public class MemoryRecordRepository implements RecordRepository{
+public class MemoryRecordRepository implements RecordRepository {
 
     private static long sequence;
     private static final Map<Long, Record> store = new ConcurrentHashMap<>();
