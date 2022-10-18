@@ -1,27 +1,33 @@
 package org.onlypearson.runningrecord.web.TestDataInit;
 
+import lombok.extern.slf4j.Slf4j;
 import org.onlypearson.runningrecord.domain.member.Member;
-import org.onlypearson.runningrecord.domain.member.service.MemberService;
+import org.onlypearson.runningrecord.domain.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 
-import javax.annotation.PostConstruct;
+import java.util.List;
 
-//@Component
+@Slf4j
 public class TestMemberDataInit {
 
-    private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public TestMemberDataInit(MemberService memberService) {
-        this.memberService = memberService;
+    public TestMemberDataInit(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
-    @PostConstruct
-    void initTestMember(){
-        Member testMember = new Member();
-        testMember.setLoginId("test");
-        testMember.setPassword("test123");
-        memberService.join(testMember);
+    @EventListener(ApplicationReadyEvent.class)
+    public void initTestMember(){
+        log.info("initTestMemberStart");
+        List<Member> members = memberRepository.findAll();
+        if(members.isEmpty()){
+            Member member = new Member();
+            member.setLoginId("test");
+            member.setPassword("1234");
+            memberRepository.save(member);
+        }
     }
 }
