@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-@Component
+//@Component
 public class TestRecordDataInit {
     private final RecordService recordService;
 
