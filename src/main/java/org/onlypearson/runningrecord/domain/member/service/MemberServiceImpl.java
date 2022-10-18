@@ -1,6 +1,7 @@
 package org.onlypearson.runningrecord.domain.member.service;
 
 import org.onlypearson.runningrecord.domain.member.Member;
+import org.onlypearson.runningrecord.domain.member.MemberDto;
 import org.onlypearson.runningrecord.domain.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
 
@@ -19,12 +20,12 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public void join(Member member) {
-        memberRepository.save(member);
+    public Member join(Member member) {
+        return memberRepository.save(member);
     }
 
     @Override
-    public Member getMemberById(Long id) {
+    public Optional<Member> getMemberById(Long id) {
         return memberRepository.findById(id);
     }
 
@@ -39,17 +40,12 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public void edit(Long id, Member member) {
-        memberRepository.update(id,member);
+    public void edit(Long id, MemberDto memberDto) {
+        memberRepository.update(id,memberDto);
     }
 
     @Override
-    public Member withdrawMember(Long id) {
-        return memberRepository.delete(id);
-    }
-
-    @Override
-    public void withdrawAll() {
-        memberRepository.deleteAll();
+    public void withdrawMember(Long id) {
+        memberRepository.delete(id);
     }
 }

@@ -1,6 +1,7 @@
 package org.onlypearson.runningrecord.domain.member.repository;
 
 import org.onlypearson.runningrecord.domain.member.Member;
+import org.onlypearson.runningrecord.domain.member.MemberDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,20 +10,21 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
+//@Repository
 public class MemoryMemberRepository implements MemberRepository {
     private static Long sequence=0L;
     private static final Map<Long, Member> store = new ConcurrentHashMap<>();
 
     @Override
-    public void save(Member member) {
+    public Member save(Member member) {
         member.setId(++sequence);
         store.put(sequence, member);
+        return member;
     }
 
     @Override
-    public Member findById(Long id) {
-        return store.get(id);
+    public Optional<Member> findById(Long id) {
+        return Optional.ofNullable(store.get(id));
     }
 
     @Override
@@ -38,20 +40,17 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public void update(Long id, Member member) {
+    public void update(Long id, MemberDto memberDto) {
         Member updateMember = store.get(id);
-        updateMember.setLoginId(member.getLoginId());
-        updateMember.setPassword(member.getPassword());
+        updateMember.setLoginId(memberDto.getLoginId());
+        updateMember.setPassword(memberDto.getPassword());
     }
 
     @Override
-    public Member delete(Long id) {
-        Member deletedMember = store.get(id);
+    public void delete(Long id) {
         store.remove(id);
-        return deletedMember;
     }
 
-    @Override
     public void deleteAll() {
         store.clear();
     }

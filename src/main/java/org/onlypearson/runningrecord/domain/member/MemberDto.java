@@ -1,10 +1,12 @@
 package org.onlypearson.runningrecord.domain.member;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class Member {
-    private Long id;
+@Getter
+@Setter
+public class MemberDto {
     private String loginId;
     private String password;
+
 }

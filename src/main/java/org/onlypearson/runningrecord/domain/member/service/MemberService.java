@@ -1,23 +1,24 @@
 package org.onlypearson.runningrecord.domain.member.service;
 
 import org.onlypearson.runningrecord.domain.member.Member;
+import org.onlypearson.runningrecord.domain.member.MemberDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface MemberService {
     //create
-    void join(Member member);
+    Member join(Member member);
 
     //read
-    Member getMemberById(Long id);
+    Optional<Member> getMemberById(Long id);
     Optional<Member> getMemberByLoginId(String loginId);
     List<Member> getMembers();
 
     //update
-    void edit(Long id, Member member);
+    void edit(Long id, MemberDto memberDto);
 
     //delete
-    Member withdrawMember(Long id);
-    default void withdrawAll(){}
+    void withdrawMember(Long id);
+
 }
